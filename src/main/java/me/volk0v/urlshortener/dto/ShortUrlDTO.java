@@ -10,14 +10,14 @@ public class ShortUrlDTO {
     private String referenceUrl;
 
     @NotEmpty(message = "shortenedUrl can't be empty")
-    private String shortenedUrl;
+    private String shortenedName;
 
     public ShortUrlDTO() {
     }
 
-    public ShortUrlDTO(String referenceUrl, String shortenedUrl) {
+    public ShortUrlDTO(String referenceUrl, String shortenedName) {
         this.referenceUrl = referenceUrl;
-        this.shortenedUrl = shortenedUrl;
+        this.shortenedName = shortenedName;
     }
 
     public String getReferenceUrl() {
@@ -28,11 +28,11 @@ public class ShortUrlDTO {
         this.referenceUrl = referenceUrl;
     }
 
-    public String getShortenedUrl() {
-        return shortenedUrl;
+    public String getShortenedName() {
+        return shortenedName;
     }
 
-    public void setShortenedUrl(String shortenedUrl) {
-        this.shortenedUrl = shortenedUrl;
+    public void setShortenedName(String shortenedName) {
+        this.shortenedName = shortenedName;
     }
 }

@@ -14,15 +14,15 @@ public class ShortUrl {
     @Column(name = "reference_url")
     private String referenceUrl;
 
-    @Column(name = "shortened_url")
-    private String shortenedUrl;
+    @Column(name = "shortened_name")
+    private String shortenedName;
 
     public ShortUrl() {
     }
 
-    public ShortUrl(String referenceUrl, String shortenedUrl) {
+    public ShortUrl(String referenceUrl, String shortenedName) {
         this.referenceUrl = referenceUrl;
-        this.shortenedUrl = shortenedUrl;
+        this.shortenedName = shortenedName;
     }
 
     public int getId() {
@@ -41,11 +41,11 @@ public class ShortUrl {
         this.referenceUrl = referenceUrl;
     }
 
-    public String getShortenedUrl() {
-        return shortenedUrl;
+    public String getShortenedName() {
+        return shortenedName;
     }
 
-    public void setShortenedUrl(String shortenedUrl) {
-        this.shortenedUrl = shortenedUrl;
+    public void setShortenedName(String shortenedName) {
+        this.shortenedName = shortenedName;
     }
 }
