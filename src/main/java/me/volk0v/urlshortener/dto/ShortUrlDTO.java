@@ -1,10 +1,12 @@
 package me.volk0v.urlshortener.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 public class ShortUrlDTO {
 
     @NotEmpty(message = "referenceUrl can't be empty")
+    @URL(message = "Reference URL should be URL")
     private String referenceUrl;
 
     @NotEmpty(message = "shortenedUrl can't be empty")
