@@ -19,6 +19,11 @@ public class ShortUrlDTO {
         this.shortenedName = shortenedName;
     }
 
+    public ShortUrlDTO(String referenceUrl) {
+        this.referenceUrl = referenceUrl;
+        this.shortenedName = "";
+    }
+
     public String getReferenceUrl() {
         return referenceUrl;
     }
