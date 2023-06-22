@@ -9,7 +9,6 @@ public class ShortUrlDTO {
     @URL(message = "Reference URL should be URL")
     private String referenceUrl;
 
-    @NotEmpty(message = "shortenedUrl can't be empty")
     private String shortenedName;
 
     public ShortUrlDTO() {
