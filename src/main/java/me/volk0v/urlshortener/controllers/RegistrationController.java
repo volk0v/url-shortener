@@ -5,6 +5,7 @@ import me.volk0v.urlshortener.dto.ShortUrlDTO;
 import me.volk0v.urlshortener.exceptions.ShortUrlNotRegisteredException;
 import me.volk0v.urlshortener.exceptions.validation.FieldsErrorsResponse;
 import me.volk0v.urlshortener.exceptions.validation.ShortFieldError;
+import me.volk0v.urlshortener.mappers.ShortUrlMapper;
 import me.volk0v.urlshortener.models.ShortUrl;
 import me.volk0v.urlshortener.services.ShortUrlsService;
 import me.volk0v.urlshortener.validators.ShortenedNameValidator;
@@ -27,15 +28,17 @@ public class RegistrationController {
 
     private final ShortUrlsService service;
     private final ShortenedNameValidator shortenedNameValidator;
+    private final ShortUrlMapper mapper;
 
-    public RegistrationController(ShortUrlsService service, ShortenedNameValidator shortenedNameValidator) {
+    public RegistrationController(ShortUrlsService service, ShortenedNameValidator shortenedNameValidator, ShortUrlMapper mapper) {
         this.service = service;
         this.shortenedNameValidator = shortenedNameValidator;
+        this.mapper = mapper;
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<String> register(@RequestBody @Valid ShortUrlDTO dto,
-                                           BindingResult bindingResult) {
+    public ResponseEntity<ShortUrlDTO> register(@RequestBody @Valid ShortUrlDTO dto,
+                                                BindingResult bindingResult) {
         String customShortenedName = dto.getShortenedName();
         if (!customShortenedName.isEmpty()) {
             shortenedNameValidator.validate(customShortenedName, bindingResult);
@@ -51,7 +54,7 @@ public class RegistrationController {
                 new ShortUrlNotRegisteredException("Something wrong with saving short URL, maybe shortened name isn't unique")
         );
 
-        return new ResponseEntity<>(shortUrl.getShortenedName(), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.toDto(shortUrl), HttpStatus.OK);
     }
 
     @ExceptionHandler
