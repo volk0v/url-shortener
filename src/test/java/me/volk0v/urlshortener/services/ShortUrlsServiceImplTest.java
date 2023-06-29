@@ -63,7 +63,7 @@ class ShortUrlsServiceImplTest {
         String shortenedName = "yandex";
 
         ShortUrl shortUrl = new ShortUrl(referenceUrl, shortenedName);
-        when(repository.findByShortenedUrl(shortUrl.getShortenedName())).thenReturn(Optional.of(shortUrl));
+        when(repository.findByShortenedName(shortUrl.getShortenedName())).thenReturn(Optional.of(shortUrl));
 
         ShortUrlsService service = new ShortUrlsServiceImpl(repository, randomStringGenerator);
 

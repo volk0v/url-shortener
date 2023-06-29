@@ -43,7 +43,7 @@ public class ShortUrlsServiceImpl implements ShortUrlsService {
 
     @Override
     public Optional<String> findByShortenedName(String shortenedName) {
-        return repository.findByShortenedUrl(shortenedName)
+        return repository.findByShortenedName(shortenedName)
                 .flatMap(shortUrl -> Optional.of(shortUrl.getReferenceUrl()));
     }
 
