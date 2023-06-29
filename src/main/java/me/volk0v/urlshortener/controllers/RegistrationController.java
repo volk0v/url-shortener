@@ -40,7 +40,9 @@ public class RegistrationController {
     public ResponseEntity<ShortUrlDTO> register(@RequestBody @Valid ShortUrlDTO dto,
                                                 BindingResult bindingResult) {
         String customShortenedName = dto.getShortenedName();
-        if (!customShortenedName.isEmpty()) {
+        if (customShortenedName == null) {
+            dto.setShortenedName("");
+        } else if (!customShortenedName.isEmpty()) {
             shortenedNameValidator.validate(customShortenedName, bindingResult);
         }
 
