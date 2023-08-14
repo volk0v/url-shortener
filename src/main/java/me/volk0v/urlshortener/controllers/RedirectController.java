@@ -31,7 +31,7 @@ public class RedirectController {
         return "redirect:" + redirectUrl;
     }
 
-    record ShortenedNameNotFoundResponse(String error, Date timestamp) {
+    public record ShortenedNameNotFoundResponse(String error, Date timestamp) {
     }
 
     @ExceptionHandler
