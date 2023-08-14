@@ -15,8 +15,7 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(RedirectController.class)
 @ExtendWith(SpringExtension.class)
@@ -39,6 +38,18 @@ class RedirectControllerTest {
         mvc.perform(get("/" + shortenedName))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl(reference));
+    }
+
+    @Test
+    public void givenNotExistingShortenedName_whenGoToPage_thenGetError() throws Exception {
+        when(service.findByShortenedName(any())).thenReturn(Optional.empty());
+
+        mvc.perform(get("/not-existing"))
+                .andExpect(status().isBadRequest())
+                .andExpectAll(
+                        jsonPath("$.error").isNotEmpty(),
+                        jsonPath("$.timestamp").exists()
+                );
     }
 
 }
